@@ -30,7 +30,8 @@
     │   ├── 01-Message-Event/         # ✅ 含 demos + 笔记
     │   ├── 02-Agent/                 # ✅ 含 demos + 笔记
     │   ├── 03-Model/                 # ✅ 含 demos + 笔记
-    │   └── 04-Context/ … 11-Workspace/
+    │   ├── 04-Context/               # ✅ 含 demos
+    │   └── 05-Tool/ … 11-Workspace/
     └── 02-Agent-as-Service/          # 第二阶段：服务化
 ```
 
@@ -41,6 +42,7 @@
 | [Message 与 Event](01-Guides/01-Building-Blocks/01-Message-Event/README.md) | `demos/` | Msg / Event / Content Block、流式事件、工具事件 |
 | [Agent](01-Guides/01-Building-Blocks/02-Agent/README.md) | `demos/` | 创建 Agent、`reply` / `reply_stream`、工具循环、多轮 |
 | [Model](01-Guides/01-Building-Blocks/03-Model/README.md) | `demos/` | Credential / 直调 Model、流式 ChatResponse、参数与 usage、结构化输出、切换供应商 |
+| [Context](01-Guides/01-Building-Blocks/04-Context/README.md) | `demos/` | 三层上下文、压缩、工具截断、LocalWorkspace offload、与 Session/RAG/LTM 边界 |
 
 完整章节列表见 [章节导航](01-Guides/README.md)。
 
@@ -116,6 +118,19 @@ python 04_parameters_and_usage.py
 python 05_model_tool_call.py
 python 06_structured_output.py
 python 07_switch_providers.py
+```
+
+**Context：**
+
+```bash
+cd 01-Guides/01-Building-Blocks/04-Context/demos
+
+python 01_inspect_context_layers.py    # 无需 API
+python 02_multiturn_context_growth.py
+python 03_manual_compress_context.py
+python 04_tool_result_truncation.py
+python 05_offload_with_workspace.py
+python 06_context_vs_others.py         # 无需 API
 ```
 
 Demo 会从手册**根目录**的 `.env` 加载配置（见各章 `demos/_common.py`）。
