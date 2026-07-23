@@ -27,9 +27,10 @@
     ├── AgentScope-VS-LangGraph.md
     ├── README.md                     # 章节导航
     ├── 01-Building-Blocks/           # 第一阶段：基础组件
-    │   ├── 01-Message-Event/         # ✅ 含 demos
-    │   ├── 02-Agent/                 # ✅ 含 demos
-    │   ├── 03-Model/ … 11-Workspace/ # 笔记骨架（持续补充）
+    │   ├── 01-Message-Event/         # ✅ 含 demos + 笔记
+    │   ├── 02-Agent/                 # ✅ 含 demos + 笔记
+    │   ├── 03-Model/                 # ✅ 含 demos + 笔记
+    │   └── 04-Context/ … 11-Workspace/
     └── 02-Agent-as-Service/          # 第二阶段：服务化
 ```
 
@@ -39,6 +40,7 @@
 |------|-----------|------|
 | [Message 与 Event](01-Guides/01-Building-Blocks/01-Message-Event/README.md) | `demos/` | Msg / Event / Content Block、流式事件、工具事件 |
 | [Agent](01-Guides/01-Building-Blocks/02-Agent/README.md) | `demos/` | 创建 Agent、`reply` / `reply_stream`、工具循环、多轮 |
+| [Model](01-Guides/01-Building-Blocks/03-Model/README.md) | `demos/` | Credential / 直调 Model、流式 ChatResponse、参数与 usage、结构化输出、切换供应商 |
 
 完整章节列表见 [章节导航](01-Guides/README.md)。
 
@@ -70,7 +72,8 @@ cp .env.example .env
 | 变量 | 含义 |
 |------|------|
 | `AI_PROVIDER` | `deepseek`（默认）/ `qwen` / `openai` / `dashscope` |
-| `DEEPSEEK_API_KEY` 等 | 对应提供商的密钥与模型名 |
+| `DEEPSEEK_*` / `QWEN_*` / `OPENAI_*` | 对应提供商的密钥、Base URL 与模型名 |
+| `AI_API_TIMEOUT` | 模型请求超时（秒），默认示例为 `60` |
 
 **切勿把 `.env` 或真实 API Key 提交到 Git。**
 
@@ -99,6 +102,20 @@ python 03_react_with_tools.py
 python 04_max_iters.py
 python 05_observe_and_multiturn.py
 python 06_tutor_agent.py
+```
+
+**Model：**
+
+```bash
+cd 01-Guides/01-Building-Blocks/03-Model/demos
+
+python 01_create_and_inspect_model.py  # 无需 API
+python 02_direct_model_call.py
+python 03_stream_chat_response.py
+python 04_parameters_and_usage.py
+python 05_model_tool_call.py
+python 06_structured_output.py
+python 07_switch_providers.py
 ```
 
 Demo 会从手册**根目录**的 `.env` 加载配置（见各章 `demos/_common.py`）。

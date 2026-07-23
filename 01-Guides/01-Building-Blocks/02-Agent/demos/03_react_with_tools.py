@@ -72,6 +72,22 @@ class LookupTerm(ToolBase):
         return ToolChunk(
             content=[TextBlock(text=json.dumps({"term": term, "explain": text}, ensure_ascii=False))],
         )
+# check_permissions
+# 必须
+# @abstractmethod，不写类都实例化不了
+# call
+# 普通工具必须覆盖
+# 基类默认会 raise NotImplementedError；只有 is_external_tool=True 的外部工具可以不实现真正执行逻辑
+# 当一个模型发出tool_call的时候 
+# 我们需要审核 也就是 check_permissions 来决定是否允许调用
+# 如果允许 则调用 call 方法
+# 如果不允许 则抛出 PermissionError
+
+# call 方法 返回一个 ToolChunk 对象
+# ToolChunk 对象 包含一个 content 列表
+# content 列表 包含一个 TextBlock 对象
+# TextBlock 对象 包含一个 text 字段
+# text 字段 包含一个字符串
 
 
 async def main() -> None:
@@ -82,6 +98,10 @@ async def main() -> None:
             "回答术语问题前，必须先调用 lookup_term 工具查询，"
             "再基于工具结果用一句话总结。"
         ),
+
+# 这里有一些超纲 ，首先就是这里 使用了 工具 工具相关的内容 其实在 05 model之中 
+# 这里 tool=Toolkit(tools=[])
+#    tools=[Bash(), Read(), Write(), Edit()],
         toolkit=Toolkit(tools=[LookupTerm()]),
         max_iters=6,
     )
@@ -119,3 +139,21 @@ async def main() -> None:
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+
+# === ReAct 时间线 ===
+# 01. ReplyStart
+# 02. ModelCall(deepseek-v4-flash)
+# 03. ToolCall(lookup_term)
+# 04. ToolResult(success)
+# 05. ModelCall(deepseek-v4-flash)
+# 06. ReplyEnd
+
+# === Msg 摘要 ===
+# role/name : assistant/Tutor
+# id        : a2f9825443ec44869d1eb5e3325a6b8c
+# text      : '在 AgentScope 中，**Agent** 是一个无状态的推理-行动循环引擎，负责调用模型、调用工具并产出消息或事件。'
+# blocks    : ['thinking', 'tool_call', 'tool_result', 'thinking', 'text']
+# usage     : input_tokens=773 output_tokens=116
+# tool_calls : ['lookup_term']
+# tool_results: ['lookup_term']

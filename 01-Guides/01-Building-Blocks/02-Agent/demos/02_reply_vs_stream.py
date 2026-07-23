@@ -48,6 +48,25 @@ async def run_stream(agent) -> None:
     if rebuilt is not None:
         print_msg_summary(rebuilt, "从事件流重建的 Msg")
 
+# 这里不要想的太过于复杂 ？AssistantMsg也就是个Msg 无非在封装的时候 
+#这里对于一个msg来讲 必须写入的字段只有 name 与 content  其他的不需要  当内容为
+# str 或者list是 会被直接包装成TextBlock
+# (name=event.name,content=[],id=event.reply_id)
+# rebuilt = AssistantMsg(name=event.name, content=[], id=event.reply_id)
+# 大致是：
+
+# {
+#   "name": "Friday",          // 来自 ReplyStartEvent.name（Agent 名）
+#   "role": "assistant",
+#   "id": "<reply_id>",        // 必须等于本轮 reply_id，append_event 才认
+#   "content": [],             // 还没有任何 content block
+#   "metadata": {},
+#   "created_at": "...",
+#   "finished_at": null,
+#   "usage": null
+# }
+
+
 
 async def main() -> None:
     agent = build_agent(
