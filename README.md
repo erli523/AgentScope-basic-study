@@ -31,7 +31,8 @@
     │   ├── 02-Agent/                 # ✅ 含 demos + 笔记
     │   ├── 03-Model/                 # ✅ 含 demos + 笔记
     │   ├── 04-Context/               # ✅ 含 demos
-    │   └── 05-Tool/ … 11-Workspace/
+    │   ├── 05-Tool/                  # ✅ 含 demos + 笔记
+    │   └── 06-Plan/ … 11-Workspace/
     └── 02-Agent-as-Service/          # 第二阶段：服务化
 ```
 
@@ -43,6 +44,7 @@
 | [Agent](01-Guides/01-Building-Blocks/02-Agent/README.md) | `demos/` | 创建 Agent、`reply` / `reply_stream`、工具循环、多轮 |
 | [Model](01-Guides/01-Building-Blocks/03-Model/README.md) | `demos/` | Credential / 直调 Model、流式 ChatResponse、参数与 usage、结构化输出、切换供应商 |
 | [Context](01-Guides/01-Building-Blocks/04-Context/README.md) | `demos/` | 三层上下文、压缩、工具截断、LocalWorkspace offload、与 Session/RAG/LTM 边界 |
+| [Tool](01-Guides/01-Building-Blocks/05-Tool/README.md) | `demos/` | ToolBase / Toolkit / ToolGroup、权限、中间件、内置工具与 Agent 调用 |
 
 完整章节列表见 [章节导航](01-Guides/README.md)。
 
@@ -131,6 +133,22 @@ python 03_manual_compress_context.py
 python 04_tool_result_truncation.py
 python 05_offload_with_workspace.py
 python 06_context_vs_others.py         # 无需 API
+```
+
+**Tool：**
+
+```bash
+cd 01-Guides/01-Building-Blocks/05-Tool/demos
+
+python 01_builtin_tools_and_schemas.py
+python 02_custom_toolbase.py
+python 03_function_tool.py
+python 04_toolkit_call_and_errors.py
+python 05_read_before_write.py
+python 06_dynamic_permission.py
+python 07_tool_middleware.py
+python 08_agent_uses_tool.py           # 需要 API
+python 09_tool_groups.py
 ```
 
 Demo 会从手册**根目录**的 `.env` 加载配置（见各章 `demos/_common.py`）。
