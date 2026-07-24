@@ -32,7 +32,9 @@
     │   ├── 03-Model/                 # ✅ 含 demos + 笔记
     │   ├── 04-Context/               # ✅ 含 demos
     │   ├── 05-Tool/                  # ✅ 含 demos + 笔记
-    │   └── 06-Plan/ … 11-Workspace/
+    │   ├── 06-Plan/                  # ✅ 含 demos + 笔记
+    │   ├── 07-Permission-System/     # ✅ 含 demos + 笔记
+    │   └── 08-Middleware/ … 11-Workspace/
     └── 02-Agent-as-Service/          # 第二阶段：服务化
 ```
 
@@ -45,6 +47,8 @@
 | [Model](01-Guides/01-Building-Blocks/03-Model/README.md) | `demos/` | Credential / 直调 Model、流式 ChatResponse、参数与 usage、结构化输出、切换供应商 |
 | [Context](01-Guides/01-Building-Blocks/04-Context/README.md) | `demos/` | 三层上下文、压缩、工具截断、LocalWorkspace offload、与 Session/RAG/LTM 边界 |
 | [Tool](01-Guides/01-Building-Blocks/05-Tool/README.md) | `demos/` | ToolBase / Toolkit / ToolGroup、权限、中间件、内置工具与 Agent 调用 |
+| [Plan](01-Guides/01-Building-Blocks/06-Plan/README.md) | `demos/` | TaskCreate/Get/List/Update、依赖、预置与序列化、规划 Agent |
+| [Permission](01-Guides/01-Building-Blocks/07-Permission-System/README.md) | `demos/` | Mode / Rules / Built-in Checks、确认事件与无人值守策略 |
 
 完整章节列表见 [章节导航](01-Guides/README.md)。
 
@@ -149,6 +153,36 @@ python 06_dynamic_permission.py
 python 07_tool_middleware.py
 python 08_agent_uses_tool.py           # 需要 API
 python 09_tool_groups.py
+```
+
+**Plan：**
+
+```bash
+cd 01-Guides/01-Building-Blocks/06-Plan/demos
+
+python 01_task_tools_and_schemas.py
+python 02_task_lifecycle.py
+python 03_dependencies_and_delete.py
+python 04_seed_and_auto_id.py
+python 05_state_serialization.py
+python 06_agent_scope_and_migration.py
+python 07_advisory_dependency.py
+python 08_planning_agent.py            # 需要 API
+```
+
+**Permission：**
+
+```bash
+cd 01-Guides/01-Building-Blocks/07-Permission-System/demos
+
+python 01_permission_modes.py
+python 02_rule_priority.py
+python 03_bash_readonly_and_safety.py
+python 04_file_permissions.py
+python 05_suggested_rules.py
+python 06_custom_permission_tool.py
+python 07_dont_ask_vs_bypass.py
+python 08_agent_confirmation_event.py  # 需要 API
 ```
 
 Demo 会从手册**根目录**的 `.env` 加载配置（见各章 `demos/_common.py`）。
